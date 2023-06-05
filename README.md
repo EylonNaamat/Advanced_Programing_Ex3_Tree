@@ -1,9 +1,9 @@
 # Advanced_Programing_Ex3_Tree
 
-Name: Eylon Naamat.
-ID: 315303529
-Name: Michael Matveev.
-ID: 315918557
+Name: Eylon Naamat.</br>
+ID: 315303529</br>
+Name: Michael Matveev.</br>
+ID: 315918557</br>
 
 In this exercise we create a tree called stree. </br>
 The makefile is called Makefile.</br>
