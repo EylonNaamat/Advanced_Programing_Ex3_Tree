@@ -43,14 +43,16 @@ int getNumberLength(long number) {
     return length;
 }
 
-int printFileDetails(const char *filepath, const struct stat *sb, int type, struct FTW *ftwb) {
+int dirTree(const char *filepath, const struct stat *sb, int type, struct FTW *ftwb) {
     if(filepath[2] == '.' && strlen(filepath) != 1){
         return 0;
     }
     if (type == FTW_NS) {                  /* Could not stat() file */
         printf("?");
     } else {
-        printf(" %*s", 4 * ftwb->level, " ");
+        for(int i = 0; i < ftwb->level-1; i++){
+            printf("|%*s", 4, " ");
+        }
         if(type == FTW_D){
             printf("└── ");
         }else if(type == FTW_F){
@@ -100,12 +102,21 @@ int printFileDetails(const char *filepath, const struct stat *sb, int type, stru
     return 0;
 }
 
-int main() {
-    int flags = 0;
-    printf(".\n");
+int main(int argc, char *argv[]) {
+    if(argc == 1) {
+        printf("%s\n", ".");
+        if (nftw(".", dirTree, 10, 0) == -1) {
+            perror("nftw");
+            exit(EXIT_FAILURE);
+        }
+    }
+    else {
+        printf("%s\n", argv[1]);
+        if (nftw(argv[1], dirTree, 10, 0) == -1) {
+            perror("nftw");
+            return 1;
+        }
+    }
 
-    // Traverse the directory tree starting from the current directory (".")
-    nftw(".", printFileDetails, 10, flags);
-
-    return 0;
+    exit(EXIT_SUCCESS);
 }

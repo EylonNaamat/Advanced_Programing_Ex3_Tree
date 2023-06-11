@@ -11,4 +11,4 @@ The code for the tree is called stree.c.</br>
 The executable file for stree.c is called stree.</br>
 In order to compile everything run the command - make all.</br>
 In order to clean everything run the command - make clean.</br>
-In order to run the shell run the command - ./stree.
+In order to run the tree run the command - ./stree and add the full path to the directory you want, the default is the current directory (.).
